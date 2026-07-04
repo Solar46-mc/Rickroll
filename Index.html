@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Free Bitcoin Generator 2026 ⚡</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+            border: 2px solid #f7931a;
+            border-radius: 15px;
+            background-color: #161b22;
+            box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);
+            max-width: 420px;
+            width: 90%;
+        }
+        h1 {
+            color: #f7931a;
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .btc-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00ff66;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+        }
+        p {
+            color: #8b949e;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .btn {
+            background-color: #f7931a;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background-color: #e17e0f;
+            transform: scale(1.02);
+        }
+        #rickroll-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            z-index: 9999;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 詐欺風画面の骨組み（中身はJavaScriptで動的に書き換えます） -->
+    <div class="container" id="promo-box">
+        <h1 id="text-title">🎉 CONGRATULATIONS! 🎉</h1>
+        <p id="text-desc1">Your wallet address has been selected!</p>
+        <div class="btc-amount">🎁 0.25 BTC</div>
+        <p id="text-desc2">Click the button below to instantly claim your reward into your cryptocurrency wallet.</p>
+        <button class="btn" id="text-btn" onclick="startRickroll()">Claim Free BTC</button>
+    </div>
+
+    <!-- リックロール用全画面コンテナ -->
+    <div id="rickroll-container">
+        <iframe id="rickroll-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // 言語ごとの翻訳データ
+        const translations = {
+            ja: {
+                title: "🎉 おめでとうございます！ 🎉",
+                desc1: "あなたのウォレットアドレスが抽選に当選しました！",
+                desc2: "下のボタンをクリックして、今すぐあなたの暗号資産ウォレットにビットコインを着金させてください。",
+                btn: "送金を受け取る (Claim Free BTC)"
+            },
+            en: {
+                title: "🎉 CONGRATULATIONS! 🎉",
+                desc1: "Your wallet address has been randomly selected!",
+                desc2: "Click the button below to instantly claim your reward into your cryptocurrency wallet.",
+                btn: "Claim Free BTC Now"
+            },
+            ko: {
+                title: "🎉 축하합니다! 🎉",
+                desc1: "귀하의 지갑 주소가 무작위 추첨에 당첨되었습니다!",
+                desc2: "아래 버튼을 클릭하여 지금 즉시 암호화폐 지갑으로 비트코인을 수령하세요.",
+                btn: "무료 BTC 받기 (Claim)"
+            },
+            zh: {
+                title: "🎉 恭喜中奖！ 🎉",
+                desc1: "您的钱包地址已被随机选中！",
+                desc2: "点击下方按钮，立即将免费比特币存入您的加密货币钱包。",
+                btn: "立即领取免费 BTC"
+            }
+        };
+
+        // ユーザーのブラウザ言語を取得（例: "ja", "en-US" などから先頭2文字を切り出し）
+        const userLang = (navigator.language || navigator.userLanguage).substring(0, 2);
+
+        // 対応している言語があればそれを使用、なければ英語(en)をデフォルトにする
+        const currentLang = translations[userLang] ? userLang : 'en';
+
+        // 画面のテキストを書き換え
+        document.getElementById('text-title').innerText = translations[currentLang].title;
+        document.getElementById('text-desc1').innerText = translations[currentLang].desc1;
+        document.getElementById('text-desc2').innerText = translations[currentLang].desc2;
+        document.getElementById('text-btn').innerText = translations[currentLang].btn;
+
+        // リックロール発動関数
+        function startRickroll() {
+            const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&disablekb=1&modestbranding=1";
+            document.getElementById('rickroll-video').src = videoUrl;
+            document.getElementById('promo-box').style.display = 'none';
+            document.getElementById('rickroll-container').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
