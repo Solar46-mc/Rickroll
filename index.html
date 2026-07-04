@@ -76,11 +76,48 @@
             height: 100%;
             border: none;
         }
+        .joke-banner {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(22, 27, 34, 0.9);
+            border: 1px solid #30363d;
+            padding: 15px 24px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            width: 85%;
+            max-width: 500px;
+            pointer-events: auto;
+        }
+        .joke-banner p {
+            margin: 0 0 10px 0;
+            color: #f0f6fc;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .links-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .joke-banner a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .joke-banner a:hover {
+            text-decoration: underline;
+            color: #79c0ff;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 詐欺風画面の骨組み（中身はJavaScriptで動的に書き換えます） -->
     <div class="container" id="promo-box">
         <h1 id="text-title">🎉 CONGRATULATIONS! 🎉</h1>
         <p id="text-desc1">Your wallet address has been selected!</p>
@@ -89,53 +126,69 @@
         <button class="btn" id="text-btn" onclick="startRickroll()">Claim Free BTC</button>
     </div>
 
-    <!-- リックロール用全画面コンテナ -->
     <div id="rickroll-container">
         <iframe id="rickroll-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="joke-banner">
+            <p id="text-joke-msg">😜 Gotcha! It's just a harmless Rickroll prank!</p>
+            <div class="links-group">
+                <a id="wiki-link" href="#" target="_blank">What is Rickroll? (Wikipedia) ↗</a>
+                <a id="repo-link" href="https://github.com/Solar46-mc/Rickroll" target="_blank">View Source on GitHub ↗</a>
+            </div>
+        </div>
     </div>
 
     <script>
-        // 言語ごとの翻訳データ
         const translations = {
             ja: {
                 title: "🎉 おめでとうございます！ 🎉",
                 desc1: "あなたのウォレットアドレスが抽選に当選しました！",
                 desc2: "下のボタンをクリックして、今すぐあなたの暗号資産ウォレットにビットコインを着金させてください。",
-                btn: "送金を受け取る (Claim Free BTC)"
+                btn: "送金を受け取る (Claim Free BTC)",
+                joke: "😜 引っかかったね！これは無害なジョークサイト（リックロール）です。",
+                wikiUrl: "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%83%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%AB",
+                wikiText: "リックロールとは？ (Wikipedia) ↗"
             },
             en: {
                 title: "🎉 CONGRATULATIONS! 🎉",
                 desc1: "Your wallet address has been randomly selected!",
                 desc2: "Click the button below to instantly claim your reward into your cryptocurrency wallet.",
-                btn: "Claim Free BTC Now"
+                btn: "Claim Free BTC Now",
+                joke: "😜 Gotcha! This is just a harmless Rickroll prank!",
+                wikiUrl: "https://en.wikipedia.org/wiki/Rickrolling",
+                wikiText: "What is Rickroll? (Wikipedia) ↗"
             },
             ko: {
                 title: "🎉 축하합니다! 🎉",
                 desc1: "귀하의 지갑 주소가 무작위 추첨에 당첨되었습니다!",
                 desc2: "아래 버튼을 클릭하여 지금 즉시 암호화폐 지갑으로 비트코인을 수령하세요.",
-                btn: "무료 BTC 받기 (Claim)"
+                btn: "무료 BTC 받기 (Claim)",
+                joke: "😜 속았지? 이것은 무해한 릭롤(Rickroll) 장난입니다.",
+                wikiUrl: "https://ko.wikipedia.org/wiki/%EB%A6%AD%EB%A1%A4",
+                wikiText: "릭롤이란? (Wikipedia) ↗"
             },
             zh: {
                 title: "🎉 恭喜中奖！ 🎉",
                 desc1: "您的钱包地址已被随机选中！",
                 desc2: "点击下方按钮，立即将免费比特币存入您的加密货币钱包。",
-                btn: "立即领取免费 BTC"
+                btn: "立即领取免费 BTC",
+                joke: "😜 你被骗啦！这只是一个无害のリックロール(Rickroll)恶作剧。",
+                wikiUrl: "https://zh.wikipedia.org/wiki/%E7%91%9E%E5%85%8B%E6%91%87%E6%BB%BE",
+                wikiText: "什么是瑞克摇摆？ (Wikipedia) ↗"
             }
         };
 
-        // ユーザーのブラウザ言語を取得（例: "ja", "en-US" などから先頭2文字を切り出し）
         const userLang = (navigator.language || navigator.userLanguage).substring(0, 2);
-
-        // 対応している言語があればそれを使用、なければ英語(en)をデフォルトにする
         const currentLang = translations[userLang] ? userLang : 'en';
 
-        // 画面のテキストを書き換え
         document.getElementById('text-title').innerText = translations[currentLang].title;
         document.getElementById('text-desc1').innerText = translations[currentLang].desc1;
         document.getElementById('text-desc2').innerText = translations[currentLang].desc2;
         document.getElementById('text-btn').innerText = translations[currentLang].btn;
+        document.getElementById('text-joke-msg').innerText = translations[currentLang].joke;
+        
+        document.getElementById('wiki-link').href = translations[currentLang].wikiUrl;
+        document.getElementById('wiki-link').innerText = translations[currentLang].wikiText;
 
-        // リックロール発動関数
         function startRickroll() {
             const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&disablekb=1&modestbranding=1";
             document.getElementById('rickroll-video').src = videoUrl;
